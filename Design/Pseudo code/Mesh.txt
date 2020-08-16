@@ -1,0 +1,83 @@
+#include "GamePCH.h"
+
+Mesh::Mesh()
+{
+  //INITIALZE ALL
+}
+
+Mesh::~Mesh()
+{
+ //DELETE ALL   
+}
+
+void Mesh::GenerateSprite(float width, float height)
+{
+
+
+    // ATM this can only be called once, so we assert if it's called again with a VBO already allocated.
+
+
+    // Vertex position info for a quad, pivot point is at bottom center.
+
+
+    // Gen and fill buffer with our attributes.
+
+}
+
+void Mesh::Draw(ShaderProgram* pShader, GLuint texture, vec2 pos,vec2 UVoffset, vec2 UVscale, Camera * cam)
+{
+    CheckForGLErrors();
+
+    // Use our shader.
+
+
+    // VBO and Attributes.
+
+
+
+    // Uniforms for transforms.
+    {
+  
+
+        // Don't leave camera position and projection scale hard-coded, create a camera object and pass them in as arguments.
+
+
+
+    // Uniforms for textures.
+
+}
+
+void Mesh::DrawHealthbar(ShaderProgram* pShader, GLuint texture, vec2 pos, vec2 UVoffset, vec2 UVscale, float Health, float maxHealth, Camera * cam, float Red, float Green, float Blue, float Alpha)
+{
+	CheckForGLErrors();
+
+	// Use our shader.
+
+	// VBO and Attributes.
+
+
+	// Uniforms for transforms.
+	
+
+
+	// Uniforms for textures.
+	
+
+
+	CheckForGLErrors();
+
+	glDrawArrays(m_PrimitiveType, 0, m_NumVerts);
+
+	CheckForGLErrors();
+}
+
+
+
+		// Draw the triangle.
+		glDrawArrays(m_PrimitiveType, 0, m_NumVerts);
+	}
+	// Check for errors.
+	CheckForGLErrors();
+}
+
+

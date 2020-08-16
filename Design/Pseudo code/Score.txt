@@ -1,0 +1,43 @@
+#include "GamePCH.h"
+
+Score::Score()
+{
+//INITALIZE
+}
+
+Score::~Score()
+{
+//DELETE
+
+
+}
+
+void Score::Draw()
+{
+//DRAW the score
+}
+
+void Score::Update(float delta)
+{
+
+//SET m_AccumilatedTime  to add delta
+
+//IF the m_AccumilatedTime  is larger or equal to m_TimeToNextFrame
+	if (m_AccumilatedTime >= m_TimeToNextFrame)
+	{
+//Set m_AccumilatedTime to 0
+//ADD m_Score
+	}
+}
+
+void Score::AddScore(int score)
+{
+//ADD m_Score to the argument
+
+}
+
+void Score::SetCamera(Camera * cam)
+{
+//SET camera
+
+}

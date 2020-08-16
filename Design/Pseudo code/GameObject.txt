@@ -1,0 +1,71 @@
+#include "GamePCH.h"
+
+GameObject::GameObject(Mesh* pMesh, ShaderProgram* pShader, GLuint texture)
+{
+//Initalize all
+ 
+}
+
+GameObject::~GameObject()
+{
+//DELETE all
+
+
+}
+
+void GameObject::Draw()
+{
+// IF the bool variable m_islife is true then
+	if (m_IsLife)
+	{
+//DRAW the mesh to the parameters
+
+//if the m_Health value is greater then 0 but lesser then 99 then
+		if (m_Health > 0 && m_Health <= 99)
+		{
+//Draw the healthbarsmesh
+		}
+	}
+}
+
+bool GameObject::GetIsAlive()
+{
+//RETURN m_IsLife
+
+}
+
+void GameObject::DealDamage(int Dam)
+{
+//MINUS m_Health to the parameters
+
+}
+
+void GameObject::SetCamera(Camera * aCamera)
+{
+//SET m_pCamera to the argument
+
+}
+
+float GameObject::GetRadius()
+{
+//RETURN m_Radius
+
+}
+
+void GameObject::SpawnIsALive()
+{
+//SET m_IsLife to true;
+
+}
+
+void GameObject::DestroyIsAlive()
+{
+//SET m_IsLife to false;
+ 
+}
+
+vec2 GameObject::GetPosition()
+{
+//RETURN m_Position
+
+}

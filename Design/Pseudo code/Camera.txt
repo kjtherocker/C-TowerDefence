@@ -1,0 +1,53 @@
+
+Camera::Camera()
+{
+	//Initalizing variables
+	//Initialize camera's position 
+
+	//Initialize camera's Scale position 
+	
+}
+
+Camera::~Camera()
+{
+}
+
+void Camera::SetObjectTranslation(Vector2 vector)
+{
+	//SET object_Position to the SetObjectTranslation Argument vector
+
+
+}
+
+void Camera::SetCameraTranslation(Vector2 Vector)
+{
+	//SET The camera’s positon to the Set CameraTranslation argument Vector
+}
+
+void Camera::SetCameraScale(Vector2 Scale)
+{
+	// SET the scale to the SetCamerScale Argurment Scale
+}
+
+Vector2 Camera::GetObjectTranslation()
+{
+	//Returning Objects Translation using the variable Object_Positon
+}
+
+Vector2 Camera::GetCameraTranslation()
+{
+	//Return GetCameraTranslate using the variable Camera_Position;
+}
+
+Vector2 Camera::GetCameraScale()
+{
+	//Return GetCameraScale using the variable scale.
+}
+
+void Camera::SetToStart()
+{
+	//Setting the camera to a StartingPosition vector2(0.0f,0.0f);
+
+}
+
+

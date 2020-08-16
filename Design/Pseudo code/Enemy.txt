@@ -1,0 +1,265 @@
+
+
+Enemy::Enemy(Mesh* pMesh, Mesh* healthmesh, ShaderProgram* pShaderhealth, ShaderProgram* pShader, GLuint texture, vec2 position, vec2 size)
+	: GameObject( pMesh, pShader,texture)
+{
+
+//INTIALIZE ALL
+
+}
+
+Enemy::~Enemy()
+{
+//DELETE ALL
+}
+
+
+void Enemy::SetTilemap(Tilemap* pTilemap)
+{
+//SET m_Tilemap to the arguement
+}
+
+float Enemy::GetHealth()
+{
+//RETURN m_Health;
+}
+
+void Enemy::Spawn()
+{
+
+//SET m_Health to 100
+    m_Health = 100;
+//SET the m_Position Vector2 to (1.0f,1.0f)
+    m_Position = Vector2(1.0f, 1.0f);
+}
+
+bool Enemy::GetIsAlive()
+{
+//RETURN m_IsLife
+}
+
+bool Enemy::GetFound()
+{
+//RETURN m_Found
+}
+
+void Enemy::SetPathfinder(int a_Columns, int a_Rows,Vector2 endp, Pathfinder* a_Pathfinder)
+{
+//SET m_Truepos to the players currentposition
+
+//SET the StartPoint to truepos
+
+//IF the End Position is equal to Vector2(0.0f,0.0f)
+	if (endp == Vector2(0.0f, 0.0f))
+	{
+
+//SET ivec2 endpoint to ivec2(The currentcolumns - 2, the current Rows - 2)	
+		ivec2 endpoint = ivec2(a_Columns - 2, a_Rows - 2);
+//SET  m_Found to the pathfindersFind path
+		m_Found = a_Pathfinder->FindPath(startpoint.x, startpoint.y, endpoint.x, endpoint.y);
+//SET the path  to a large number
+		int Path[PATHFINDINGPATH];
+//Set the lenght of the pathfinder 
+		int len = a_Pathfinder->GetPath(Path, PATHFINDINGPATH, endpoint.x, endpoint.y);
+
+//Send in SetPath
+		SetPath(Path, len);
+	}
+	else
+	{
+//SET ivec2 endpoint to ivec2(The currentcolumns - 2, the current Rows - 2)	
+		ivec2 endpoint = ivec2((int)endp.x ,(int)endp.y);
+//SET  m_Found to the pathfindersFind path
+		m_Found = a_Pathfinder->FindPath(startpoint.x, startpoint.y, endpoint.x, endpoint.y);
+//SET the path  to a large number
+		int Path[PATHFINDINGPATH];
+//Set the lenght of the pathfinder 
+		int len = a_Pathfinder->GetPath(Path, PATHFINDINGPATH, endpoint.x, endpoint.y);
+//Send in SetPath
+		SetPath(Path, len);
+	}
+
+
+}
+
+void Enemy::SetSpriteSheet(SpriteSheet * Sprite)
+{
+//Set the spritesheet the arguement Sprite
+	m_pSpriteSheet = Sprite;
+}
+
+void Enemy::SetPath(int * a_Path, int length)
+{
+//For how many there are in the length 
+    for (int i = 0; i < length; i++)
+    {
+//Check the current path 
+        CurrentPath[i] = a_Path[length - i - 1];
+    }
+    for (int i = length; i < PATHFINDINGPATH; i++)
+    {
+//Check if its an invalid index
+        CurrentPath[i] = -1;
+    }
+}
+
+bool Enemy::WouldPlayerFitOnMap(vec2 worldpos)
+{
+	vec2 adjustedworldpos;
+	ivec2 tilepos;
+
+	// Test bottom left corner.
+
+
+	// Test bottom right corner.
+
+
+	// Test top left corner.
+
+
+	// Test top right corner.
+
+	return true;
+}
+
+void Enemy::Update(float deltatime)
+{
+
+
+//IF the m_Health is lesser then 0 then
+    if (m_Health <= 0)
+    {
+//SET m_IsLife is equal to false
+
+    }
+
+//IF m_IsLife is equal to true then
+    if (m_IsLife == true)
+    {
+
+//SET the speed to LOWSPEED
+        float speed = LOWSPEED;
+//SET the direction to Vector2(0,0)
+        vec2 dir(0, 0);
+
+//SET the Timer
+        m_AccumlatedTime += deltatime;
+
+//IF the Timer is greater then 0.2f Then
+        if (m_AccumlatedTime > 0.2f)
+        {
+//SET Timer to 0.0f
+            m_AccumlatedTime = 0.0f;
+//INCREMENT m_CurrenFrameNumber
+            m_CurrentFrameNumber++;
+
+//If m_CurrentFrameNumber is greater then 1 then
+            if (m_CurrentFrameNumber > 1)
+            {
+//SET m_CurrentFrameNumber to 0
+                m_CurrentFrameNumber = 0;
+            }
+        }
+
+//SET the animfilename to nothing
+        std::string animfilename = "";
+
+//SET the actualframe to the CurrentFramenumber
+        int actualframe = m_CurrentFrameNumber;
+//SET the difference to 0
+
+        Vector2 Difference = Vector2(0.0f, 0.0f);
+
+//FOR how many are in the path 
+        for (int i = 0; i < PATHFINDINGPATH; i++)
+        {
+//if the currentpath is equal to an invalid index
+            if (CurrentPath[i] == -1)
+            {
+//Break
+            }
+
+//SET the difference to 0
+           
+
+//IF the difference is lesser then  0.05 then
+            if (abs(Difference.x) < 0.05 && abs(Difference.y) < 0.05)
+            {
+// IF the path is on the current path and not invalid then
+                if (i + 1 < PATHFINDINGPATH && CurrentPath[i + 1] != -1)
+                {
+//SET m_Target to the next node
+
+               
+
+                }
+                else
+                {
+//m_Target is equal to m_Position
+                  
+                }
+            }
+        }
+
+        //IF m_Target is rqual to LOWHEALTH then
+		if (m_Health <= LOWHEALTH)
+		{
+//SET speed to HIGHSPEED
+			
+		}
+//SET dir to m_Target - m_Position
+		
+//NORMALIZE dir
+
+        // The actual movement
+
+//UPDATE m_Position plus equal dir times speed times deltatime
+ 
+
+//if the direction is right 
+        if (dir.x > 0.5f)
+        {
+//Set Animation frame
+        }
+//if the direction is left
+        else if (dir.x < -0.5f)
+        {
+//Set Animation frame
+        }
+//if the direction is down
+        else if (dir.y < -0.5f)
+        {
+//Set Animation frame
+        }
+//if the direction is up
+        else if (dir.y > 0.5f)
+        {
+//Set Animation frame
+        }
+        else
+        {
+//Set Animation frame
+        }
+
+        // Check for collisions and set dir to 0 if we can't move.
+        {
+            // If we can't fit horizontally, zero out dir x.
+            if (WouldPlayerFitOnMap(m_Position + vec2(dir.x, 0.0f)) == false)
+            {
+
+                dir.x = 0;
+            }
+
+            // If we can't fit vertically, zero out dir y.
+            if (WouldPlayerFitOnMap(m_Position + vec2(0.0f, dir.y)) == false)
+            {
+
+                dir.y = 0;
+            }
+        }
+
+//ADD png to the end of the file name 
+   
+    }
+	
+}

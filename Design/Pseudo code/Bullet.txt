@@ -1,0 +1,99 @@
+#include "GamePCH.h"
+
+
+
+Bullet::Bullet(Mesh* pMesh, ShaderProgram* pShader, GLuint texture, vec2 position, vec2 size)
+	: GameObject(pMesh, pShader, texture)
+{
+	//INTALIZE
+}
+
+Bullet::~Bullet()
+{
+	//DELETE
+}
+
+void Bullet::Update(float deltatime)
+{
+//IF the bullet is alive then
+    if (m_IsLife)
+    {
+        // if the variable m_TargetPlayer is not equal to nullptr then do what is inside
+        if (m_pTargetEnemy != nullptr)
+        {
+            //Set TargetPos to the pointer m_TargetPlayer and then get the method called //GetPosition()
+           
+         }
+        //Set the StartingPosition to the StartingPosition + (the TargetPos - Startingpositon) * //(deltatime/5.0f)
+        
+    }
+
+//DEREMENT the timer by deltatime
+
+
+//IF m_Timer is equal or lesser then 0 then
+	if (m_Timer <= 0)
+	{
+//Destroy this
+		
+//RESET the timer to m_Bullet lifetime
+		
+	}
+}
+
+void Bullet::SetCamera(Camera * cam)
+{
+//SET m_pCamera to cam argument
+
+}
+
+void Bullet::SetPositionToTurret(Vector2 a_TurretPos)
+{
+// SET m_Position to the TurretsPos
+
+}
+
+void Bullet::SetTarget(Enemy * enemy)
+{
+//SET the Target enemy to the enemy
+
+}
+
+void Bullet::SetTarget(vec2 vec)
+{
+//SET the targetpos to the argument
+
+}
+
+vec2 Bullet::GetPosition()
+{
+//RETURN m_Position
+	return m_Position;
+}
+
+void Bullet::CheckCollisionWithBulletAndEnemy(Enemy * enemy)
+{
+//IF the enemy is alive then
+    if (enemy->GetIsAlive())
+    {
+
+        //SET radii to enemy->GetRadius() plus this->GetRadius();
+        //SET radii = Target pointer to the method GetRadius() plus m_Player pointer to the method GetRadius();
+ //IF the radius is greater then the distance then
+        if (radii > distance)
+        {
+
+            
+        }
+    }
+	else
+	{
+//DESTROY this
+
+
+	}
+}
+
+
+
+

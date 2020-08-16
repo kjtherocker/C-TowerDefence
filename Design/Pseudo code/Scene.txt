@@ -1,0 +1,162 @@
+#include "GamePCH.h"
+#include "Tower.h"
+
+Scene::Scene(Framework * a_pFramework)
+{
+    // Initialization 
+
+
+}
+
+Scene::~Scene()
+{
+
+//Delete all
+}
+
+void Scene::LoadContent(Game* pGame)
+{
+    // Create our shaders.
+
+
+
+	m_pSpritesheet = pGame->GetSpriteSheet();
+ 
+    // Create our meshes.  Sprite pivot is set to bottom center.
+ 
+
+    // Load our textures.
+
+
+
+}
+
+void Scene::Update(float deltatime)
+{
+//Set the screen width to the windowsize and columns and rows
+
+
+//Update
+
+
+
+    // if the mouse is clicked, take the return value of these 2 functions
+    // and do math to them to convert them into world space. 
+
+//Get the Mouse Coordinates and set it to a grid 
+
+
+//Set the tower cursor to the mouse coord
+
+
+
+//FOr how many towers there are loop through
+    for (int i = 0; i < (int)m_VecTowers.size(); i++)
+    {
+//if m_VecTowers  Tower state is not equal to Tower State Building then
+        if (m_VecTowers.at(i)->GetTowerState() != &Tower::Building)
+        {
+
+//SET bool to false
+            bool foundSomebody = false;
+//FOR how many there are in enemy Vector enemy loop through it 
+
+//Check collision
+
+
+
+}
+
+void Scene::SceneAddEnemy()
+{
+//Set bool Spawnenemy to true
+
+//Reenable the  enemy 
+ 
+
+//Create a new enemy
+    
+
+
+}
+
+void Scene::Draw()
+{
+
+//Draw Everything 
+
+
+}
+
+void Scene::Reset()
+{
+    //Clear all the vectors
+}
+
+
+void Scene::AddTower()
+{
+
+//Check to put a tower there if there is no
+}
+
+void Scene::AddTileType(TileTypes tile)
+{
+//CHECK if the tile can be placed
+
+//CHECK if the enemys found can go through
+}
+
+void Scene::ChangeTile()
+{
+//Set a tile depending on the value
+
+}
+
+
+void Scene::HandleEvent(Event * aeven)
+{
+     (if Inputevent>m_ID == '1')
+                {
+ Set new columns and rows.
+            Set Pathfinder.
+                }
+       if (pInputEvent->m_ID == '2')
+                {
+
+            Set new columns and rows.
+            Set Pathfinder.
+
+                }
+        if (pInputEvent->m_ID == '3')
+                {
+            Set new columns and rows.
+            Set Pathfinder.
+                }
+         if (pInputEvent->m_ID == '4')
+                {
+            Set new columns and rows.
+            Set Pathfinder.
+	     
+                }
+            }
+        }
+        if (pInputEvent->m_InputDeviceType == InputDeviceType_Mouse)
+        {
+        
+                if (pInputEvent->m_ID == 0)
+                {
+                    ChangeTile();
+
+                }
+                if (pInputEvent->m_ID == 1)
+                {
+                    m_Tile++;
+                }
+            }
+        }
+ 
+
+
+}
+

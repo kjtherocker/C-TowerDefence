@@ -1,0 +1,218 @@
+#include "GamePCH.h"
+
+Tower::Tower(Mesh* pMesh,ShaderProgram* pShader, GLuint texture, vec2 position, vec2 size, Mesh * a_Bulletmesh, Mesh * a_BulletHealmMesh, GLuint a_BulletTexture)
+	: GameObject(pMesh, pShader, texture)
+{
+//INTALIZING everything 
+
+}
+
+Tower::~Tower()
+{
+//DELETE everything
+    for (int i = 0; i < (int)m_VecBullet.size(); i++)
+    {
+        delete  m_VecBullet.at(i);
+    }
+	m_VecBullet.clear();
+
+
+	glDeleteTextures(1, &m_TextureBullet);
+	glDeleteTextures(1, &m_Texture);
+	 m_TowerState = nullptr;
+}
+
+bool Tower::Shoot()
+{
+//If the bool is not true then fire
+}
+
+
+
+void Tower::SetIdle()
+{
+//SET the tower state to idle
+
+}
+
+void Tower::idle(float delta)
+{
+   //Do nothing
+}
+
+void Tower::Attack(float delta)
+{
+//if the bool m_JustShot is true then
+   if (m_JustShot)
+   {
+//m_timer will be minused by delta
+//if the m_Timer is less then 0 then
+       if (m_Timer <= 0)
+       {
+//SET the timer back to the delay
+           m_Timer = SHOT_DELAY;
+//SET the just shot to false
+           m_JustShot = false;
+       }
+   }
+ 
+}
+
+void Tower::Building(float delta)
+{
+//IF the bool m_IsBuilding is true
+    if (m_IsBuilding)
+    {
+//m_TimerBuilding is now minused by delta
+
+//if the m_Timer building is less then 0 then
+        if (m_TimerBuilding <= 0)
+        {
+//RESET the  m_TimerBuilding to the building time;
+
+//SET the state of  m_TowerState to idle;
+
+//Set m_IsBuilding to false;
+           
+            m_IsBuilding = false;
+        }
+    }
+}
+
+void Tower::SetIsBuilding()
+{
+//SET the m_TowerState to Building;
+}
+
+void Tower::StartBuilding()
+{
+
+//SET the bool to true
+}
+
+void Tower::Update(float deltatime)
+{
+	//If the bool m_IsLIfe is true then
+	if (m_IsLife)
+	{
+//Update the m_TowerState
+		(this->*m_TowerState)(deltatime);
+//FOR every bullet in the vector loop through it 
+		for (int i = 0; i < (int)m_VecBullet.size(); i++)
+		{
+// IF there is a bullet that is alive then
+			if (m_VecBullet.at(i)->GetIsAlive() == true)
+			{
+//CHECK Get the bullets collision with the enemy
+				m_VecBullet.at(i)->CheckCollisionWithBulletAndEnemy(m_TargetEnemy);
+
+			}
+//SET the bullets update to deltatime
+			m_VecBullet.at(i)->Update(deltatime);
+
+		}
+	}
+	else
+	{
+//FOR every bullet in the vector loop through it 
+		for (int i = 0; i < (int)m_VecBullet.size(); i++)
+		{
+//DESTROY all the bullet
+				m_VecBullet.at(i)->DestroyIsAlive();
+		}
+	}
+}
+
+void Tower::DrawBullets()
+{
+//FOR every bullet in the vector loop through it 
+    for (int i = 0; i < (int)m_VecBullet.size(); i++)
+    {
+//DRAW all the bullets
+        m_VecBullet.at(i)->Draw();
+    }
+}
+
+void Tower::TowerAddBullet(vec2 TurretPos, Enemy* enemy)
+{
+// Set the SpawnBullet bool to true
+
+//FOR every bullet in the vector loop through it 
+
+    for (int i = 0; i < (int)m_VecBullet.size(); i++)
+    {
+//if there is any bullets in the vector that are dead then
+        if (m_VecBullet.at(i)->GetIsAlive() == false)
+        {
+//RENABLE the bullet
+        }
+    }
+//if the bool SpawnBullet is true then
+    if (SpawnBullet)
+    {
+//SPAWN a new bullet
+
+    }
+   
+}
+
+void Tower::SetCamera(Camera * cam)
+{
+//SET m_pCamera to the argument cam
+	m_pCamera = cam;
+}
+
+void Tower::SetTexture(GLuint a_text)
+{
+//Set the texture to what is needed
+    m_Texture = a_text;
+}
+
+void Tower::SetPosition(float mouseX, float mouseY)
+{
+//SET the position to the arguments
+
+    m_Position = Vector2(mouseX, mouseY);
+
+}
+
+vec2 Tower::GetPosition()
+{
+//RETURN the position
+	return m_Position;
+}
+
+Tower::TowerState Tower::GetTowerState()
+{
+//RETURN towestate
+    return Tower::TowerState(m_TowerState);
+}
+
+bool Tower::CheckCollision(Enemy * a_enemy)
+{
+
+
+    
+        //SET radii to this>GetRadius() plus m_VecEnemys.at(i)->GetRadius();
+
+        //SET radii = thispointer to the method GetRadius() plus a_enemy to the method GetRadius();
+
+//IF the radius and distance overlap then
+        if (radii > distance)
+        {
+//IF the enemy is alive then
+            if (a_enemy->GetIsAlive())
+            {
+//SET The tower state to Attack
+                m_TowerState = &Tower::Attack;
+//IF the Shoot method returns true then
+                if (Shoot())
+                {
+//Add bullets from the turrets position and the target is the a_enemy
+                }
+                return true;
+            }
+        }
+        return false;
+    
+}
